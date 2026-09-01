@@ -1,3 +1,5 @@
+//Clase hija de Personal
+
 package datos;
 
 import java.time.LocalDate;
