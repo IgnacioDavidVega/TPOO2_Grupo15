@@ -13,8 +13,7 @@
 		<property name="show_sql">false</property><!-- en true muestra hql en consola-->
         
 		<!--Mapeo Entidades   -->
-		<mapping resource="mapeos/Festival.hbm.xml" />
-		<mapping resource="mapeos/UnidadVenta.hbm.xml" />
+		<mapping resource="mapeos/Personal.hbm.xml" />
 
 		<!-- Faltan agregar los mapeos de las demás entidades. -->
 	</session-factory>
