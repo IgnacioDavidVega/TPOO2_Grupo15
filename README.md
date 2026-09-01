@@ -1,2 +1,16 @@
 # TPOO2_Grupo15
 Trabajo Práctico de la catedra de Orientación a Objetos 2 de la Universidad Nacional de Lanús
+
+Grupo 15
+Miembros de este grupo:
+ * Avila, Brian
+ * Casco, Tomas Andres
+ * Romero, Gabriel Omar
+ * Vega, Ignacio David
+
+Clases realizados:
+ * Personal -> Cocinero y Cajero / Vega, Ignacio David
+ * Festival / Avila, Brian
+
+Importante:
+  * Para poder ejecutar el código, es necesario tener Java 17.
