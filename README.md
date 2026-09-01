@@ -16,7 +16,8 @@ Importante:
   * Para poder ejecutar el código, es necesario tener Java 17.
   * Asegurarse que esté cargado las librerias correctamente.
 
-  * Para compilar:
+  * Para compilar es necesario crear la base de datos con el comando: create database bd_tp_oo2;
+  
   * Paso 1: en la carpeta raiz ejecutar este comando:
       javac -cp "lib/*;." -d out (Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName })
   
