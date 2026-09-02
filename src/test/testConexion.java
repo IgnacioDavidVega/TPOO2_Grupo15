@@ -2,7 +2,7 @@ package test;
 
 import org.hibernate.Session;
 import dao.HibernateUtil;
-
+//Hola
 public class testConexion {
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
