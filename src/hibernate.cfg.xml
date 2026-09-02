@@ -19,6 +19,5 @@
 		<mapping resource="mapeos/Plato.hbm.xml" />
 		<mapping resource="mapeos/DetallePedido.hbm.xml" />
 		<mapping resource="mapeos/Pedido.hbm.xml" />
-		<!-- Faltan agregar los mapeos de las demás entidades. -->
 	</session-factory>
 </hibernate-configuration>
