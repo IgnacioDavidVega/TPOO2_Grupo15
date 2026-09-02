@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="datos.Plato" table="plato">
+    <id column="idPlato" name="idPlato">
+        <generator class="identity"/>
+    </id>
+
+    <property column="nombrePlato" name="nombrePlato" type="string"/>
+    <property column="precioVenta" name="precioVenta" type="double"/>
+    <property column="costoProduccion" name="costoProduccion" type="double"/>
+    
+    <!-- Relación 1 a Muchos hacia DetallePedido -->
+        <!-- inverse="true" evita que Hibernate haga UPDATES duplicados -->
+        <set name="detalles" table="detalle_pedido" inverse="true" cascade="all">
+            <key column="idPlato" />
+            <one-to-many class="datos.DetallePedido" />
+        </set>
+    </class>
+</hibernate-mapping>
