@@ -1,10 +1,14 @@
 package datos;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Plato {
     private int idPlato;
     private String nombrePlato;
     private double precioVenta;
     private double costoProduccion;
+    private Set<DetallePedido> detalles = new HashSet<>();
 
     public Plato() {
     }
@@ -46,6 +50,14 @@ public class Plato {
 
     public void setCostoProduccion(double costoProduccion) {
         this.costoProduccion = costoProduccion;
+    }
+
+    public Set<DetallePedido> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(Set<DetallePedido> detalles) {
+        this.detalles = detalles;
     }
 
     @Override

@@ -14,11 +14,11 @@
         
 		<!--Mapeo Entidades   -->
 		<mapping resource="mapeos/Personal.hbm.xml" />
+		<mapping resource="mapeos/Festival.hmb.xml" />
 		<mapping resource="mapeos/UnidadVenta.hbm.xml" />
 		<mapping resource="mapeos/Plato.hbm.xml" />
 		<mapping resource="mapeos/DetallePedido.hbm.xml" />
 		<mapping resource="mapeos/Pedido.hbm.xml" />
-		<mapping resource="mapeos/Festival.hbm.xml" />
 		<!-- Faltan agregar los mapeos de las demás entidades. -->
 	</session-factory>
 </hibernate-configuration>

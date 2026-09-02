@@ -19,7 +19,7 @@
         <many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta" not-null="true" />
 
         <!-- Relación 1 a Muchos hacia la tabla intermedia DetallePedido -->
-        <set name="detalles" table="detalle_pedido" cascade="all" inverse="true">
+        <set name="detallesPedido" table="detalle_pedido" cascade="all" inverse="true">
             <key column="idPedido" />
             <one-to-many class="datos.DetallePedido" />
         </set>
