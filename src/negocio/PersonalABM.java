@@ -4,15 +4,15 @@ import java.util.List;
 import dao.PersonalDAO;
 import datos.Personal;
 
-public class ClienteABM {
-    private static ClienteABM instancia = null; // Patrón Singleton
+public class PersonalABM {
+    private static PersonalABM instancia = null; // Patrón Singleton
 
-    protected ClienteABM() {
+    protected PersonalABM() {
     }
 
-    public static ClienteABM getInstance() {
+    public static PersonalABM getInstance() {
         if (instancia == null)
-            instancia = new ClienteABM();
+            instancia = new PersonalABM();
         return instancia;
     }
 
