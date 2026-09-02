@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="datos.Pedido" table="pedido">
+        
+        <!-- Clave primaria autoincremental -->
+        <id column="idPedido" name="idPedido">
+            <generator class="identity" />
+        </id>
+
+        <property name="fechaPedido" column="fechaPedido" />
+
+        <!-- Relación Muchos a 1 con Festival -->
+        <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="true" />
+
+        <!-- Relación Muchos a 1 con Unidad Venta -->
+        <many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta" not-null="true" />
+
+        <!-- Relación 1 a Muchos hacia la tabla intermedia DetallePedido -->
+        <set name="detalles" table="detalle_pedido" cascade="all" inverse="true">
+            <key column="idPedido" />
+            <one-to-many class="datos.DetallePedido" />
+        </set>
+    </class>
+</hibernate-mapping>

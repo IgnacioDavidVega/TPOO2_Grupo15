@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Pedido {
@@ -8,7 +9,8 @@ public class Pedido {
     private LocalDate fechaPedido;
     private Festival festival;
     private UnidadVenta unidadVenta;
-    private Set<DetallePedido> detallesPedido;
+    private Set<DetallePedido> detallesPedido = new HashSet<>(); // Nose si va asi, es para que noa arroje un error al
+                                                                 // cargar un pedido
 
     public Pedido() {
     }
