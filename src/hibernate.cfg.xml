@@ -14,7 +14,7 @@
         
 		<!--Mapeo Entidades   -->
 		<mapping resource="mapeos/Personal.hbm.xml" />
-
+		<mapping resource="mapeos/UnidadVenta.hbm.xml" />
 		<!-- Faltan agregar los mapeos de las demás entidades. -->
 	</session-factory>
 </hibernate-configuration>

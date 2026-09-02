@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="datos.UnidadVenta" table="UnidadVenta">
+        <id name="idUnidadVenta" column="idUnidadVenta">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="nombreComercial" column="nombreComercial" type="string"/>
+        <property name="superficie" column="superficie" type="long"/>
+        <property name="codigoUnico" column="codigoUnico" type="string"/>
+
+        <joined-subclass name="datos.FoodTruck" table="foodTruck">
+            <key column="idUnidadVenta"/>
+            <property name="patente" column="patente" type="string"/>
+            <property name="conexionElectrica" column="conexionElectrica" type="boolean"/>
+        </joined-subclass>
+
+        <joined-subclass name="datos.PuestoDesarmable" table="puestoDesarmable">
+            <key column="idUnidadVenta"/>
+            <property name="cantidadCarpas" column="cantidadCarpas" type="long"/>
+            <property name="tiempoMontaje" column="tiempoMontaje" type="long"/>
+        </joined-subclass>
+        
+    </class>
+</hibernate-mapping>
