@@ -11,6 +11,7 @@ Miembros de este grupo:
 Clases realizados:
  * Personal -> Cocinero y Cajero / Vega, Ignacio David
  * Festival / Avila, Brian
+ * UnidadVenta -> FoodTruck y PuestoDesarmable / Romero, Gabriel Omar
 
 Importante:
   * Para poder ejecutar el código, es necesario tener Java 17 y que el proyecto se compile con esa version.
