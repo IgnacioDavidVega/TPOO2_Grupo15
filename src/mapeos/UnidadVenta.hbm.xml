@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+"https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="datos.UnidadVenta" table="UnidadVenta">
         <id name="idUnidadVenta" column="idUnidadVenta">
@@ -10,6 +10,22 @@
         <property name="nombreComercial" column="nombreComercial" type="string"/>
         <property name="superficie" column="superficie" type="long"/>
         <property name="codigoUnico" column="codigoUnico" type="string" unique="true"/>
+        <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="true"/>
+        
+        <set name="platos" table="plato" order-by="idPlato asc" inverse="true" lazy="true" fetch="select">
+        	<key column="idUnidadVenta" not-null="true" />
+        	<one-to-many class="datos.Plato" />
+		</set>
+		
+		<set name="pedidos" table="pedido" order-by="idPedido asc" inverse="true" lazy="true" fetch="select">
+        	<key column="idUnidadVenta" not-null="true" />
+        	<one-to-many class="datos.Pedido" />
+		</set>
+		
+		<set name="personal" table="personal" order-by="idPersonal asc" inverse="true" lazy="true" fetch="select">
+        	<key column="idUnidadVenta" not-null="true" />
+        	<one-to-many class="datos.Personal" />
+		</set>
 
         <joined-subclass name="datos.FoodTruck" table="foodTruck">
             <key column="idUnidadVenta"/>

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import dao.UnidadVentaDao;
+import datos.Festival;
 import datos.FoodTruck;
 import datos.Personal;
 import datos.Plato;
@@ -36,7 +37,7 @@ public class UnidadVentaABM {
 		return valido;
 	}
 	
-	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, String patente, boolean conexionElectrica) throws Exception {
+	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, Festival festival, String patente, boolean conexionElectrica) throws Exception {
 		
 		if (superficie<=0) {
 			throw new Exception("Superficie Invalida, deber ser mayor a 0");
@@ -50,11 +51,11 @@ public class UnidadVentaABM {
 			throw new Exception("Codigo Invalido, ya esta en uso");
 		}
 		
-		UnidadVenta u = new FoodTruck(nombreComercial, responsableCargo, superficie, codigoUnico, new HashSet<>(), new HashSet<>(), patente, conexionElectrica);
+		UnidadVenta u = new FoodTruck(nombreComercial, responsableCargo, superficie, codigoUnico, festival, new HashSet<>(), new HashSet<>(), new HashSet<>(), patente, conexionElectrica);
 		return dao.agregar(u);
 	}
 	
-	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, long cantidadCarpas, long tiempoMontaje) throws Exception {
+	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, Festival festival, long cantidadCarpas, long tiempoMontaje) throws Exception {
 		
 		if (superficie<=0) {
 			throw new Exception("Superficie Invalida, deber ser mayor a 0");
@@ -72,7 +73,7 @@ public class UnidadVentaABM {
 			throw new Exception("Codigo Invalido, ya esta en uso");
 		}
 		
-		UnidadVenta u = new PuestoDesarmable(nombreComercial, responsableCargo, superficie, codigoUnico, new HashSet<>(), new HashSet<>(), cantidadCarpas, tiempoMontaje);
+		UnidadVenta u = new PuestoDesarmable(nombreComercial, responsableCargo, superficie, codigoUnico, festival, new HashSet<>(), new HashSet<>(), new HashSet<>(), cantidadCarpas, tiempoMontaje);
 		return dao.agregar(u);
 	}
 	

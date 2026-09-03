@@ -9,20 +9,24 @@ public abstract class UnidadVenta {
 	protected Personal responsableCargo;
 	protected long superficie;
 	protected String codigoUnico;
+	protected Festival festival;
 	protected Set<Plato> platos;
 	protected Set<Personal> personal;
+	protected Set<Pedido> pedidos;
 	
 	public UnidadVenta() {}
 
-	public UnidadVenta(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico,
-			Set<Plato> platos, Set<Personal> personal) {
+	public UnidadVenta(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, 
+			Festival festival, Set<Plato> platos, Set<Personal> personal, Set<Pedido> pedidos) {
 		super();
 		this.nombreComercial = nombreComercial;
 		this.responsableCargo = responsableCargo;
 		this.superficie = superficie;
 		this.codigoUnico = codigoUnico;
+		this.festival = festival;
 		this.platos = platos;
 		this.personal = personal;
+		this.pedidos = pedidos;
 	}
 
 	public long getIdUnidadVenta() {
@@ -65,6 +69,14 @@ public abstract class UnidadVenta {
 		this.codigoUnico = codigoUnico;
 	}
 
+	public Festival getFestival() {
+		return festival;
+	}
+
+	public void setFestival(Festival festival) {
+		this.festival = festival;
+	}
+
 	public Set<Plato> getPlatos() {
 		return platos;
 	}
@@ -79,6 +91,14 @@ public abstract class UnidadVenta {
 
 	public void setPersonal(Set<Personal> personal) {
 		this.personal = personal;
+	}
+	
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override

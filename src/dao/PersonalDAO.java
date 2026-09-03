@@ -1,10 +1,16 @@
 package dao;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import datos.FoodTruck;
 import datos.Personal;
+import datos.PuestoDesarmable;
+import datos.UnidadVenta;
 
 public class PersonalDAO {
 
@@ -56,4 +62,5 @@ public class PersonalDAO {
         }
         return lista;
     }
+    
 }
