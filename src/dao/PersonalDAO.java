@@ -1,17 +1,12 @@
 package dao;
 
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import datos.Cajero;
-import datos.FoodTruck;
 import datos.Personal;
-import datos.PuestoDesarmable;
-import datos.UnidadVenta;
 
 public class PersonalDAO {
 
@@ -63,22 +58,46 @@ public class PersonalDAO {
         }
         return lista;
     }
-    
+
     public int agregar(Personal objeto) {
-		int id = 0;
-		try {
-			iniciaOperacion();
-			id = Integer.parseInt(session.save(objeto).toString());
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
-		}
-		return id;
-	}
-    
+        int id = 0;
+        try {
+            iniciaOperacion();
+            id = Integer.parseInt(session.save(objeto).toString());
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+        return id;
+    }
+
+    public void actualizar(Personal objeto) throws HibernateException {
+        try {
+            iniciaOperacion();
+            session.update(objeto);
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+        } finally {
+            session.close();
+        }
+    }
+
+    public void eliminar(Personal objeto) throws HibernateException {
+        try {
+            iniciaOperacion();
+            session.delete(objeto);
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+        } finally {
+            session.close();
+        }
+    }
+
     public Personal traerDNI(int dni) {
         Personal objeto = null;
 
@@ -98,7 +117,6 @@ public class PersonalDAO {
         Cajero cajero = null;
         try {
             iniciaOperacion();
-            // Al ordenar por fechaNacimiento desc, el más joven queda primero
             String hql = "from Cajero c order by c.fechaNacimiento desc";
             cajero = session.createQuery(hql, Cajero.class)
                             .setMaxResults(1)
@@ -110,4 +128,30 @@ public class PersonalDAO {
         }
         return cajero;
     }
+
+    // Consulta para saber cuantas personas trabajan en un festival especifico
+    public List<Personal> traerPorFestival(long idFestival) throws HibernateException {
+        List<Personal> lista = null;
+
+        try {
+            iniciaOperacion();
+
+            String hql = "select p " +
+                    "from Personal p " +
+                    "join p.unidadVenta u " +
+                    "join u.festival f " +
+                    "where f.idFestival = :idFestival";
+
+            lista = session.createQuery(hql, Personal.class)
+                    .setParameter("idFestival", idFestival)
+                    .getResultList();
+
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
+
 }
