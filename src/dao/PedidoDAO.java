@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -103,6 +104,23 @@ public class PedidoDAO {
             lista = session.createQuery("from Pedido p where p.festival.idFestival = :idFestival", Pedido.class)
                     .setParameter("idFestival", festival.getIdFestival())
                     .list();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
+    
+    public List<Pedido> traerPorRangoFechas(LocalDate desde, LocalDate hasta) throws HibernateException {
+        List<Pedido> lista = null;
+        try {
+            iniciaOperacion();
+            String hql = "from Pedido p where p.fechaPedido >= :desde and p.fechaPedido <= :hasta order by p.fechaPedido desc";
+            lista = session.createQuery(hql, Pedido.class)
+                           .setParameter("desde", desde)
+                           .setParameter("hasta", hasta)
+                           .list();
         } catch (HibernateException he) {
             manejaExcepcion(he);
         } finally {
