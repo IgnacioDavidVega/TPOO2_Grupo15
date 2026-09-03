@@ -69,4 +69,5 @@ public class Pedido {
         return "Pedido [idPedido=" + idPedido + ", fechaPedido=" + fechaPedido + ", festival=" + festival
                 + ", unidadVenta=" + unidadVenta + "]";
     }
+    
 }

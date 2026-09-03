@@ -2,10 +2,12 @@ package test;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import datos.DetallePedido;
 import datos.Festival;
+import datos.Pedido;
 import datos.Plato;
 import datos.UnidadVenta;
 import negocio.FestivalABM;
@@ -26,7 +28,7 @@ public class TestBrianAvila {
         Plato burger = null;
         Plato papas = null;
 
-        
+        // Primer CDU: Traer el plato más vendido del Festival
         try {
             long idFestival = festivalABM.agregar("Lollapalooza 2026", "Predio Hipódromo", LocalDate.now(), LocalDate.now().plusDays(3), new HashSet<>());
             festival = festivalABM.traer(idFestival);
@@ -80,6 +82,16 @@ public class TestBrianAvila {
             }
         } catch (Exception e) {
             System.err.println("Error al ejecutar la consulta: " + e.getMessage());
+        }
+        // Segundo CDU: Traer pedidos entre fechas.
+        try {
+            LocalDate desde = LocalDate.now().minusDays(1);
+            LocalDate hasta = LocalDate.now();
+
+            List<Pedido> pedidos = pedidoABM.traerPorRangoFechas(desde, hasta);
+            System.out.println("Cantidad de pedidos entre fechas: " + pedidos.size());
+        } catch (Exception e) {
+            System.err.println("Error al traer pedidos por fechas: " + e.getMessage());
         }
 	}
 }

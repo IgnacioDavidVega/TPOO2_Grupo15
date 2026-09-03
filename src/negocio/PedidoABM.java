@@ -72,4 +72,14 @@ public class PedidoABM {
     public List<Pedido> traerPorFestival(Festival festival) {
         return dao.traerPorFestival(festival);
     }
+    
+    public List<Pedido> traerPorRangoFechas(LocalDate desde, LocalDate hasta) throws Exception {
+        if (desde == null || hasta == null) {
+            throw new Exception("Las fechas no pueden ser nulas.");
+        }
+        if (desde.isAfter(hasta)) {
+            throw new Exception("La fecha 'desde' no puede ser posterior a la fecha 'hasta'.");
+        }
+        return dao.traerPorRangoFechas(desde, hasta);
+    }
 }
