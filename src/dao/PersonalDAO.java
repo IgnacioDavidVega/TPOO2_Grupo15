@@ -78,4 +78,19 @@ public class PersonalDAO {
 		return id;
 	}
     
+    public Personal traerDNI(int dni) {
+        Personal objeto = null;
+
+        try {
+            iniciaOperacion();
+            String hql = "from Personal p where p.dni = :dni";
+            objeto = (Personal) session.createQuery(hql).setParameter("dni", dni).uniqueResult();
+
+        } finally {
+            session.close();
+        }
+
+        return objeto;
+    }
+    
 }

@@ -30,13 +30,23 @@ public class PersonalABM {
         return PersonalDAO.getInstance().traer();
     }
     
-    public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, double sueldoBase, UnidadVenta unidadVenta, String turnoTrabajo) {
+    public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, double sueldoBase, UnidadVenta unidadVenta, String turnoTrabajo) throws Exception {
     	Personal p = new Cajero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, unidadVenta, turnoTrabajo);
+    	
+    	if(dao.traerDNI(dni)!=null) {
+    		throw new Exception("ERROR, DNI ya existe");
+    	}
+    	
     	return dao.agregar(p);
     }
     
-    public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, double sueldoBase, UnidadVenta unidadVenta, String especialidadCulinaria, double plusCategoria) {
+    public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, double sueldoBase, UnidadVenta unidadVenta, String especialidadCulinaria, double plusCategoria) throws Exception {
     	Personal p = new Cocinero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, unidadVenta, especialidadCulinaria, plusCategoria);
+    	
+    	if(dao.traerDNI(dni)!=null) {
+    		throw new Exception("ERROR, DNI ya existe");
+    	}
+    	
     	return dao.agregar(p);
     }
     

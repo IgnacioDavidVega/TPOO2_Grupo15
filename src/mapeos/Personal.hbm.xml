@@ -17,14 +17,14 @@
         <many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta" not-null="true"/>
 
         <joined-subclass name="datos.Cocinero" table="cocinero">
-            <key column="idCocinero" />
-            <property column="especialidadCulinaria" name="especialidadCulinaria" type="string" />
-            <property column="plusCategoria" name="plusCategoria" type="double" />
+            <key column="idPersonal" />
+            <property name="especialidadCulinaria" column="especialidadCulinaria" type="string" />
+            <property name="plusCategoria" column="plusCategoria" type="double" />
         </joined-subclass>
 
         <joined-subclass name="datos.Cajero" table="cajero">
-            <key column="idCajero" />
-            <property column="turnoTrabajo" name="turnoTrabajo" type="string" />
+            <key column="idPersonal" />
+            <property name="turnoTrabajo" column="turnoTrabajo" type="string" />
         </joined-subclass>
 
     </class>

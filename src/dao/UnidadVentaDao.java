@@ -143,8 +143,8 @@ public class UnidadVentaDao {
 		List<UnidadVenta> lista = null;
 		try {
 			iniciaOperacion();
-			String hql = "from UnidadVenta u where u.superficie > = :superficie";
-			lista = session.createQuery(hql,UnidadVenta.class).setParameter("superficie",superficie).getResultList();
+			String hql = "from UnidadVenta u where u.superficie >= :superficie";
+			lista = session.createQuery(hql, UnidadVenta.class).setParameter("superficie",superficie).getResultList();
 		} finally {
 			session.close();
 		}
