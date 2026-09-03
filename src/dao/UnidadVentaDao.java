@@ -151,6 +151,7 @@ public class UnidadVentaDao {
 		return lista;
 	}
 	
+	//Revisar porque creo que son irrelevantes por la bidireccion o para preguntar
 	public boolean agregarPersonal(long idUnidadVenta, Personal personal) throws HibernateException{
 		UnidadVenta objeto = null;
 		boolean resultado=false;
@@ -166,6 +167,7 @@ public class UnidadVentaDao {
 		return resultado;
 	}
 	
+	//Revisar porque creo que son irrelevantes por la bidireccion o para preguntar
 	public boolean agregarPlato(long idUnidadVenta, Plato plato) throws HibernateException{
 		UnidadVenta objeto = null;
 		boolean resultado=false;
@@ -179,6 +181,18 @@ public class UnidadVentaDao {
 			session.close();
 		}
 		return resultado;
+	}
+	
+	public UnidadVenta traerUnidadVentaDni(int dni) {
+	    UnidadVenta unidad = null;
+	    try {
+	        iniciaOperacion();
+	        String hql = "select p.unidadVenta from Personal p join p.unidadVenta u where p.dni = :dni";
+	        unidad = (UnidadVenta) session.createQuery(hql).setParameter("dni", dni).uniqueResult();
+	    } finally {
+	        session.close();
+	    }
+	    return unidad;
 	}
 	
 }

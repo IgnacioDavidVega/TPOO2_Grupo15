@@ -40,15 +40,15 @@ public class UnidadVentaABM {
 	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, Festival festival, String patente, boolean conexionElectrica) throws Exception {
 		
 		if (superficie<=0) {
-			throw new Exception("Superficie Invalida, deber ser mayor a 0");
+			throw new Exception("ERROR: Superficie Invalida, deber ser mayor a 0");
 		}
 		
 		if(!codigoUnicoValido(codigoUnico)) {
-			throw new Exception("Codigo Invalido, 5 letras mayus y 5 numeros");
+			throw new Exception("ERROR: Codigo Invalido, 5 letras mayus y 5 numeros");
 		}
 		
 		if(dao.traer(codigoUnico)!=null) {
-			throw new Exception("Codigo Invalido, ya esta en uso");
+			throw new Exception("ERROR: Codigo Invalido, ya esta en uso");
 		}
 		
 		UnidadVenta u = new FoodTruck(nombreComercial, responsableCargo, superficie, codigoUnico, festival, new HashSet<>(), new HashSet<>(), new HashSet<>(), patente, conexionElectrica);
@@ -58,19 +58,19 @@ public class UnidadVentaABM {
 	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, Festival festival, long cantidadCarpas, long tiempoMontaje) throws Exception {
 		
 		if (superficie<=0) {
-			throw new Exception("Superficie Invalida, deber ser mayor a 0");
+			throw new Exception("ERROR: Superficie Invalida, deber ser mayor a 0");
 		}
 		
 		if(tiempoMontaje<=0) {
-			throw new Exception("Tiempo Invalida, deber ser mayor a 0");
+			throw new Exception("ERROR: Tiempo Invalido, deber ser mayor a 0");
 		}
 		
 		if(!codigoUnicoValido(codigoUnico)) {
-			throw new Exception("Codigo Invalido, 5 letras mayus y 5 numeros");
+			throw new Exception("ERROR: Codigo Invalido, 5 letras mayus y 5 numeros");
 		}
 		
 		if(dao.traer(codigoUnico)!=null) {
-			throw new Exception("Codigo Invalido, ya esta en uso");
+			throw new Exception("ERROR: Codigo Invalido, ya esta en uso");
 		}
 		
 		UnidadVenta u = new PuestoDesarmable(nombreComercial, responsableCargo, superficie, codigoUnico, festival, new HashSet<>(), new HashSet<>(), new HashSet<>(), cantidadCarpas, tiempoMontaje);
@@ -102,12 +102,22 @@ public class UnidadVentaABM {
 		return dao.traerUnidadVentaSuperficie(superficie);
 	}
 	
+	//Consultar con los profes por el tema de la bidireccion
 	public boolean agregarPersonal(long idUnidadVenta, Personal personal) {
 		return dao.agregarPersonal(idUnidadVenta, personal);
 	}
 	
+	//Consultar con los profes por el tema de la bidireccion
 	public boolean agregarPlato(long idUnidadVenta, Plato plato) {
 		return dao.agregarPlato(idUnidadVenta, plato);
+	}
+	
+	public UnidadVenta traerUnidadVentaDni(int dni) throws Exception{
+		UnidadVenta unidad = dao.traerUnidadVentaDni(dni);
+		if(unidad==null) {
+			throw new Exception("ERROR, DNI no encontrado");
+		}
+		return unidad;
 	}
 	
 }

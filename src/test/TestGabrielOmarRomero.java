@@ -1,12 +1,8 @@
 package test;
 
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
-
-import datos.Cajero;
-import datos.Cocinero;
 import datos.Festival;
 import datos.FoodTruck;
 import datos.Personal;
@@ -101,12 +97,14 @@ public class TestGabrielOmarRomero {
 	    	personal4 = personalABM.traer(idPersonal);
 		    System.out.println(personal4);
 	    }catch(Exception e) {
-	        e.printStackTrace();
-	    }
+			System.out.println(e.getMessage());
+		}
 	    
+	    
+	    System.out.println("\n------------UNIDAD SEGUN SUPERFICIE------------\n");
 	    
 	    try {
-	    	List<UnidadVenta> lista = unidadVentaABM.traerUnidadVentaSuperficie(5);
+	    	List<UnidadVenta> lista = unidadVentaABM.traerUnidadVentaSuperficie(21);
 	    	for (UnidadVenta u : lista) {
 	    		if(u instanceof FoodTruck) {
 	    			FoodTruck f = (FoodTruck) u;
@@ -137,7 +135,21 @@ public class TestGabrielOmarRomero {
 			System.out.println(e.getMessage());
 		}
 	    
+	    System.out.println("\n------------SEGUN EL DNI DE UN EMPLEADO DEL PERSONAL QUIERO SABER EN QUE UNIDAD TRABAJA------------\n");
 	    
+	    try {
+	    	UnidadVenta u = unidadVentaABM.traerUnidadVentaDni(123);
+	    	System.out.println(u);
+	    }catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	    
+	    try {
+	    	UnidadVenta u = unidadVentaABM.traerUnidadVentaDni(999999999);
+	    	System.out.println(u);
+	    }catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	    
 	}
 	
