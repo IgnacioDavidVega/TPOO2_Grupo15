@@ -13,6 +13,9 @@ Clases realizados:
  * Festival / Avila, Brian
  * UnidadVenta -> FoodTruck y PuestoDesarmable / Romero, Gabriel Omar
 
+Testeos CDU:
+* Romero, Gabriel Omar: traerUnidadVentaSuperficie / traerUnidadVentaYPersonal / traerUnidadVentaDni
+
 Importante:
   * Para poder ejecutar el código, es necesario tener Java 17 y que el proyecto se compile con esa version.
   * Asegurarse que esté cargado las librerias correctamente.
