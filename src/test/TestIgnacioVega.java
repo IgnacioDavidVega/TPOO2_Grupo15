@@ -39,11 +39,11 @@ public class TestIgnacioVega {
                 int idUnidadVenta = unidadVentaABM.agregar(
                         "Puesto de Ignacio",
                         null,
-                        25L,
+                        25,
                         "IGNVG12345",
                         festival,
-                        2L,
-                        30L);
+                        2,
+                        30);
                 unidadVenta = unidadVentaABM.traer(idUnidadVenta);
                 System.out.println("Unidad de venta creada: " + unidadVenta);
             }
