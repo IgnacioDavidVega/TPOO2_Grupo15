@@ -43,13 +43,13 @@ public class PlatoDAO {
         return objeto;
     }
 
-    public Plato traer(String nombre) throws HibernateException {
+    public Plato traer(String nombrePlato) throws HibernateException {
         Plato objeto = null;
         try {
             iniciaOperacion();
-            objeto = (Plato) session.createQuery("from Plato p where p.nombre = :nombre")
-                    .setParameter("nombre", nombre)
-                    .uniqueResult();
+            objeto = session.createQuery("from Plato p where p.nombrePlato = :nombrePlato", Plato.class)
+                            .setParameter("nombrePlato", nombrePlato)
+                            .uniqueResult();
         } catch (HibernateException he) {
             manejaExcepcion(he);
         } finally {

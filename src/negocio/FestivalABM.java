@@ -7,6 +7,7 @@ import java.util.Set;
 import dao.FestivalDao;
 import datos.Festival;
 import datos.UnidadVenta;
+import datos.Plato;
 
 public class FestivalABM {
 	FestivalDao dao = new FestivalDao();
@@ -33,6 +34,14 @@ public class FestivalABM {
 
 	public List<Festival> traerPorTemporada(String temporada) {
 		return dao.traerPorTemporada(temporada);
+	}
+	
+	public Plato traerPlatoMasVendido(long idFestival) throws Exception {
+	    Festival f = dao.traer(idFestival);
+	    if (f == null) {
+	        throw new Exception("ERROR: No existe el festival con ID: " + idFestival);
+	    }
+	    return dao.traerPlatoMasVendido(idFestival);
 	}
 }
 

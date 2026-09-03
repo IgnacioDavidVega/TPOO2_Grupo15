@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import datos.Festival;
+import datos.Plato;
 
 public class FestivalDao {
 	private static Session session;
@@ -97,5 +98,28 @@ public class FestivalDao {
 			session.close();
 		}
 		return lista;
+	}
+	
+	public Plato traerPlatoMasVendido(long idFestival) throws HibernateException {
+	    Plato plato = null;
+	    try {
+	        iniciaOperacion();
+	        String hql = "select dp.plato " +
+	                     "from Pedido p " +
+	                     "join p.detallesPedido dp " +
+	                     "where p.festival.idFestival = :idFestival " +
+	                     "group by dp.plato " +
+	                     "order by sum(dp.cantidad) desc";
+	                     
+	        plato = (Plato) session.createQuery(hql)
+	                               .setParameter("idFestival", idFestival)
+	                               .setMaxResults(1)
+	                               .uniqueResult();
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	    } finally {
+	        session.close();
+	    }
+	    return plato;
 	}
 }
