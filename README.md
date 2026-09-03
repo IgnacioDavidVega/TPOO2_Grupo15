@@ -15,6 +15,7 @@ Clases realizados:
 
 Testeos CDU:
 * Romero, Gabriel Omar: traerUnidadVentaSuperficie / traerUnidadVentaYPersonal / traerUnidadVentaDni
+* Vega, Ignacio David: traerPorFestival (consulta sobre cuantas personas trabajan en un festival especifico)
 
 Importante:
   * Para poder ejecutar el código, es necesario tener Java 17 y que el proyecto se compile con esa version.
