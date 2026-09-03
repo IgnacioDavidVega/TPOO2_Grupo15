@@ -10,6 +10,7 @@ Miembros de este grupo:
 
 Clases realizados:
  * Personal -> Cocinero y Cajero / Vega, Ignacio David
+ * Pedido / Detalle Pedido / Plato -> Vega, Ignacio David
  * Festival / Avila, Brian
  * UnidadVenta -> FoodTruck y PuestoDesarmable / Romero, Gabriel Omar
 
