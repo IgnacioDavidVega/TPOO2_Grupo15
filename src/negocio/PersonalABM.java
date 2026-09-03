@@ -50,4 +50,8 @@ public class PersonalABM {
     	return dao.agregar(p);
     }
     
+    public Cajero traerCajeroMasJoven() throws Exception {
+        return dao.traerCajeroMasJoven();
+    }
+    
 }

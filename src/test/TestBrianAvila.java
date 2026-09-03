@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import datos.Cajero;
 import datos.DetallePedido;
 import datos.Festival;
 import datos.Pedido;
@@ -12,16 +13,18 @@ import datos.Plato;
 import datos.UnidadVenta;
 import negocio.FestivalABM;
 import negocio.PedidoABM;
+import negocio.PersonalABM;
 import negocio.PlatoABM;
 import negocio.UnidadVentaABM;
 
 public class TestBrianAvila {
 
-	public static void main(String[] args) {
-		FestivalABM festivalABM = new FestivalABM();
+    public static void main(String[] args) {
+        FestivalABM festivalABM = new FestivalABM();
         PlatoABM platoABM = PlatoABM.getInstance();
         PedidoABM pedidoABM = PedidoABM.getInstance();
         UnidadVentaABM uvABM = UnidadVentaABM.getInstance();
+        PersonalABM personalABM = PersonalABM.getInstance();
 
         Festival festival = null;
         UnidadVenta puesto = null;
@@ -83,6 +86,7 @@ public class TestBrianAvila {
         } catch (Exception e) {
             System.err.println("Error al ejecutar la consulta: " + e.getMessage());
         }
+
         // Segundo CDU: Traer pedidos entre fechas.
         try {
             LocalDate desde = LocalDate.now().minusDays(1);
@@ -93,5 +97,24 @@ public class TestBrianAvila {
         } catch (Exception e) {
             System.err.println("Error al traer pedidos por fechas: " + e.getMessage());
         }
-	}
+
+        // Tercer CDU: Traer al cajero más joven.
+        try {
+            if (puesto != null) {
+                personalABM.agregar("Ivan", "Maldonado", 123457, LocalDate.of(1998, 3, 15), LocalDate.now(), 450000.0, puesto, "Tarde");
+                personalABM.agregar("Facundo", "Blanco", 123456, LocalDate.of(2004, 11, 20), LocalDate.now(), 450000.0, puesto, "Mañana");
+            }
+            Cajero cajeroMasJoven = personalABM.traerCajeroMasJoven();
+
+            if (cajeroMasJoven != null) {
+                System.out.println("Cajero más joven: " + cajeroMasJoven.getNombre() + " " 
+                        + cajeroMasJoven.getApellido() + " (Fecha de Nacimiento: " 
+                        + cajeroMasJoven.getFechaNacimiento() + ")");
+            } else {
+                System.out.println("No se encontraron cajeros registrados.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error en la consulta de personal: " + e.getMessage());
+        }
+    }
 }

@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.Cajero;
 import datos.FoodTruck;
 import datos.Personal;
 import datos.PuestoDesarmable;
@@ -93,4 +94,20 @@ public class PersonalDAO {
         return objeto;
     }
     
+    public Cajero traerCajeroMasJoven() throws HibernateException {
+        Cajero cajero = null;
+        try {
+            iniciaOperacion();
+            // Al ordenar por fechaNacimiento desc, el más joven queda primero
+            String hql = "from Cajero c order by c.fechaNacimiento desc";
+            cajero = session.createQuery(hql, Cajero.class)
+                            .setMaxResults(1)
+                            .uniqueResult();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+        } finally {
+            session.close();
+        }
+        return cajero;
+    }
 }
