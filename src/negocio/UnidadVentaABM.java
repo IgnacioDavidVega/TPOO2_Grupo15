@@ -15,7 +15,7 @@ public class UnidadVentaABM {
 	
 	private static UnidadVentaABM instancia = null;
 	
-	UnidadVentaDao dao = new UnidadVentaDao();
+	UnidadVentaDao dao = UnidadVentaDao.getInstance();
 	
 	protected UnidadVentaABM() {}
 	

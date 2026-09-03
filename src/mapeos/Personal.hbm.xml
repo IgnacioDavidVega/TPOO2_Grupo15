@@ -14,6 +14,7 @@
         <property name="fechaNacimiento" column="fechaNacimiento" type="LocalDate" />
         <property name="fechaIngreso" column="fechaIngreso" type="LocalDate" />
         <property name="sueldoBase" column="sueldoBase" type="double" />
+        <many-to-one name="unidadVenta" class="datos.UnidadVenta" column="idUnidadVenta" not-null="true"/>
 
         <joined-subclass name="datos.Cocinero" table="cocinero">
             <key column="idCocinero" />

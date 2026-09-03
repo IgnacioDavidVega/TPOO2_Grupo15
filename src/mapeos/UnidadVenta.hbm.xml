@@ -11,19 +11,20 @@
         <property name="superficie" column="superficie" type="long"/>
         <property name="codigoUnico" column="codigoUnico" type="string" unique="true"/>
         <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="true"/>
+        <many-to-one name="responsableCargo" class="datos.Personal" column="idResponsableCargo"/>
         
         <set name="platos" table="plato" order-by="idPlato asc" inverse="true" lazy="true" fetch="select">
-        	<key column="idUnidadVenta" not-null="true" />
+        	<key column="idUnidadVenta" />
         	<one-to-many class="datos.Plato" />
 		</set>
 		
 		<set name="pedidos" table="pedido" order-by="idPedido asc" inverse="true" lazy="true" fetch="select">
-        	<key column="idUnidadVenta" not-null="true" />
+        	<key column="idUnidadVenta" />
         	<one-to-many class="datos.Pedido" />
 		</set>
 		
 		<set name="personal" table="personal" order-by="idPersonal asc" inverse="true" lazy="true" fetch="select">
-        	<key column="idUnidadVenta" not-null="true" />
+        	<key column="idUnidadVenta" />
         	<one-to-many class="datos.Personal" />
 		</set>
 

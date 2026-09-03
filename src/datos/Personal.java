@@ -11,12 +11,13 @@ public abstract class Personal {
     protected LocalDate fechaNacimiento;
     protected LocalDate fechaIngreso;
     protected double sueldoBase;
+    protected UnidadVenta unidadVenta;
 
     public Personal() {
     }
 
     public Personal(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-            double sueldoBase) {
+            double sueldoBase, UnidadVenta unidadVenta) {
         super();
         this.nombre = nombre;
         this.apellido = apellido;
@@ -24,6 +25,7 @@ public abstract class Personal {
         this.fechaNacimiento = fechaNacimiento;
         this.fechaIngreso = fechaIngreso;
         this.sueldoBase = sueldoBase;
+        this.unidadVenta = unidadVenta;
     }
 
     public int getIdPersonal() {
@@ -81,8 +83,16 @@ public abstract class Personal {
     public void setSueldoBase(double sueldoBase) {
         this.sueldoBase = sueldoBase;
     }
+    
+    public UnidadVenta getUnidadVenta() {
+		return unidadVenta;
+	}
 
-    @Override
+	public void setUnidadVenta(UnidadVenta unidadVenta) {
+		this.unidadVenta = unidadVenta;
+	}
+
+	@Override
     public String toString() {
         return "idPersonal=" + idPersonal + ", nombre=" + nombre + ", apellido=" + apellido
                 + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + ", fechaIngreso=" + fechaIngreso

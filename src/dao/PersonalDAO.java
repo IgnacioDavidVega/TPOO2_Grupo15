@@ -63,4 +63,19 @@ public class PersonalDAO {
         return lista;
     }
     
+    public int agregar(Personal objeto) {
+		int id = 0;
+		try {
+			iniciaOperacion();
+			id = Integer.parseInt(session.save(objeto).toString());
+			tx.commit();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			session.close();
+		}
+		return id;
+	}
+    
 }

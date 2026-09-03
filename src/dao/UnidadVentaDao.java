@@ -17,7 +17,7 @@ public class UnidadVentaDao {
 	private Transaction tx;
 	private static UnidadVentaDao instancia = null;
 	
-	public UnidadVentaDao() {}
+	protected UnidadVentaDao() {}
 	
 	public static UnidadVentaDao getInstance() {
 		if (instancia == null)

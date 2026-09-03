@@ -12,9 +12,8 @@ public class Cocinero extends Personal {
     }
 
     public Cocinero(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-            double sueldoBase, int idPersonal, String especialidadCulinaria, double plusCategoria) {
-        super(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase);
-        this.idPersonal = idPersonal;
+            double sueldoBase, UnidadVenta unidadVenta, String especialidadCulinaria, double plusCategoria) {
+        super(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, unidadVenta);
         this.especialidadCulinaria = especialidadCulinaria;
         this.plusCategoria = plusCategoria;
     }

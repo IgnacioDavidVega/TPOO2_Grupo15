@@ -14,7 +14,7 @@
         <property name="fechaInicio" column="fechaInicio" type="java.time.LocalDate" not-null="true"/>
         <property name="fechaFin" column="fechaFin" type="java.time.LocalDate" not-null="true"/>
         <set name="unidadesVenta" table="unidadVenta" order-by="idUnidadVenta asc" inverse="true" lazy="true" fetch="select">
-			<key column="idUnidadVenta" not-null="true" />
+			<key column="idFestival" />
 			<one-to-many class="datos.UnidadVenta" />
 		</set>
         
