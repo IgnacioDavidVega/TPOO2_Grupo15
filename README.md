@@ -19,7 +19,6 @@ Testeos CDU:
 * Avila, Brian: traerPlatoMasVendido / traerPorRangoFechas / traerCajeroMasJoven 
 
 Importante:
-  * Para poder ejecutar el código, es necesario tener Java 17 y que el proyecto se compile con esa version.
-  * Asegurarse que esté cargado las librerias correctamente.
-
+  * Se utiliza la version de Java 26.
+  * Asegurarse que esté cargado las librerias correctamente. (Las librerias se encuentran en la carpeta lib)
   * Para compilar es necesario crear la base de datos con el comando: create database bd_tp_oo2;
