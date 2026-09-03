@@ -9,7 +9,7 @@
         
         <property name="nombreComercial" column="nombreComercial" type="string"/>
         <property name="superficie" column="superficie" type="long"/>
-        <property name="codigoUnico" column="codigoUnico" type="string"/>
+        <property name="codigoUnico" column="codigoUnico" type="string" unique="true"/>
 
         <joined-subclass name="datos.FoodTruck" table="foodTruck">
             <key column="idUnidadVenta"/>

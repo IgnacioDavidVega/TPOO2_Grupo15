@@ -7,6 +7,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.Personal;
+import datos.Plato;
 import datos.UnidadVenta;
 
 public class UnidadVentaDao {
@@ -101,8 +103,8 @@ public class UnidadVentaDao {
 		List<UnidadVenta> lista = null;
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from UnidadVenta u order by u.nombreComercial asc",
-					UnidadVenta.class).getResultList();
+			String hql="from UnidadVenta u order by u.nombreComercial asc";
+			lista = session.createQuery(hql, UnidadVenta.class).getResultList();
 		} finally {
 			session.close();
 		}
@@ -136,5 +138,47 @@ public class UnidadVentaDao {
         }
         return objeto;
     }
+	
+	public List<UnidadVenta> traerUnidadVentaSuperficie(long superficie) throws HibernateException{
+		List<UnidadVenta> lista = null;
+		try {
+			iniciaOperacion();
+			String hql = "from UnidadVenta u where u.superficie > = :superficie";
+			lista = session.createQuery(hql,UnidadVenta.class).setParameter("superficie",superficie).getResultList();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	public boolean agregarPersonal(long idUnidadVenta, Personal personal) throws HibernateException{
+		UnidadVenta objeto = null;
+		boolean resultado=false;
+		try {
+			iniciaOperacion();
+			objeto = (UnidadVenta) session.get(UnidadVenta.class, idUnidadVenta);
+			objeto.getPersonal().add(personal);
+			tx.commit();
+			resultado=true;
+		} finally {
+			session.close();
+		}
+		return resultado;
+	}
+	
+	public boolean agregarPlato(long idUnidadVenta, Plato plato) throws HibernateException{
+		UnidadVenta objeto = null;
+		boolean resultado=false;
+		try {
+			iniciaOperacion();
+			objeto = (UnidadVenta) session.get(UnidadVenta.class, idUnidadVenta);
+			objeto.getPlatos().add(plato);
+			tx.commit();
+			resultado=true;
+		} finally {
+			session.close();
+		}
+		return resultado;
+	}
 	
 }

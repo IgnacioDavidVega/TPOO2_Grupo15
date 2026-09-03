@@ -6,13 +6,16 @@ import java.util.List;
 import dao.UnidadVentaDao;
 import datos.FoodTruck;
 import datos.Personal;
+import datos.Plato;
 import datos.PuestoDesarmable;
 import datos.UnidadVenta;
 
 public class UnidadVentaABM {
 	
 	private static UnidadVentaABM instancia = null;
+	
 	UnidadVentaDao dao = new UnidadVentaDao();
+	
 	protected UnidadVentaABM() {}
 	
 	public static UnidadVentaABM getInstance() {
@@ -25,25 +28,59 @@ public class UnidadVentaABM {
 		return UnidadVentaDao.getInstance().traer(idUnidadVenta);
 	}
 
-	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, String patente, boolean conexionElectrica) {
-		// Pendiente implementar lógica de negocio
+	private boolean codigoUnicoValido(String codigo) {
+		boolean valido = false;
+		if (codigo!=null) {
+			valido = codigo.matches("[A-Z]{5}[0-9]{5}");
+		}
+		return valido;
+	}
+	
+	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, String patente, boolean conexionElectrica) throws Exception {
+		
+		if (superficie<=0) {
+			throw new Exception("Superficie Invalida, deber ser mayor a 0");
+		}
+		
+		if(!codigoUnicoValido(codigoUnico)) {
+			throw new Exception("Codigo Invalido, 5 letras mayus y 5 numeros");
+		}
+		
+		if(dao.traer(codigoUnico)!=null) {
+			throw new Exception("Codigo Invalido, ya esta en uso");
+		}
+		
 		UnidadVenta u = new FoodTruck(nombreComercial, responsableCargo, superficie, codigoUnico, new HashSet<>(), new HashSet<>(), patente, conexionElectrica);
 		return dao.agregar(u);
 	}
 	
-	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, long cantidadCarpas, long tiempoMontaje) {
-		// Pendiente implementar lógica de negocio
+	public int agregar(String nombreComercial, Personal responsableCargo, long superficie, String codigoUnico, long cantidadCarpas, long tiempoMontaje) throws Exception {
+		
+		if (superficie<=0) {
+			throw new Exception("Superficie Invalida, deber ser mayor a 0");
+		}
+		
+		if(tiempoMontaje<=0) {
+			throw new Exception("Tiempo Invalida, deber ser mayor a 0");
+		}
+		
+		if(!codigoUnicoValido(codigoUnico)) {
+			throw new Exception("Codigo Invalido, 5 letras mayus y 5 numeros");
+		}
+		
+		if(dao.traer(codigoUnico)!=null) {
+			throw new Exception("Codigo Invalido, ya esta en uso");
+		}
+		
 		UnidadVenta u = new PuestoDesarmable(nombreComercial, responsableCargo, superficie, codigoUnico, new HashSet<>(), new HashSet<>(), cantidadCarpas, tiempoMontaje);
 		return dao.agregar(u);
 	}
-
+	
 	public void modificar(UnidadVenta u) {
-		// Pendiente implementar lógica de negocio
 		dao.actualizar(u);
 	}
 
 	public void eliminar(long idUnidadVenta) {
-		// Pendiente implementar lógica de negocio
 		UnidadVenta u = dao.traer(idUnidadVenta);
 		dao.eliminar(u);
 	}
@@ -58,6 +95,18 @@ public class UnidadVentaABM {
 	
 	public UnidadVenta traerUnidadVentaYPersonal(long idUnidadVenta) {
 		return dao.traerUnidadVentaYPersonal(idUnidadVenta);
+	}
+	
+	public List<UnidadVenta> traerUnidadVentaSuperficie(long superficie){
+		return dao.traerUnidadVentaSuperficie(superficie);
+	}
+	
+	public boolean agregarPersonal(long idUnidadVenta, Personal personal) {
+		return dao.agregarPersonal(idUnidadVenta, personal);
+	}
+	
+	public boolean agregarPlato(long idUnidadVenta, Plato plato) {
+		return dao.agregarPlato(idUnidadVenta, plato);
 	}
 	
 }
