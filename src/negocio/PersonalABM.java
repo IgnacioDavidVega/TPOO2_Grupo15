@@ -63,4 +63,8 @@ public class PersonalABM {
     public List<Personal> traerPorFestival(long idFestival) {
         return dao.traerPorFestival(idFestival);
     }
+    
+    public List<Cocinero> traerCocineroPorFestivalYEspecialidad(long idFestival, String especialidadCulinaria){
+    	return dao.traerCocineroPorFestivalYEspecialidad(idFestival, especialidadCulinaria);
+    }
 }

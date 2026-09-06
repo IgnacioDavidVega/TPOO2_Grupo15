@@ -32,6 +32,7 @@ public class TestAgregarDatos {
         UnidadVenta uv1 = null;
         Festival festival2 = null;
         UnidadVenta uv2 = null;
+        UnidadVenta uv3 = null;
 
         Plato hamburguesa = null;
         Plato papasFritas = null;
@@ -76,13 +77,30 @@ public class TestAgregarDatos {
                         "Food Truck de Ignacio",
                         null, // responsableCargo
                         25, // superficie
-                        "IGNVG12346", // código único
+                        "IGLRG12346", // código único
                         festival1,
                         "AA123BB", // patente
                         true // conexión eléctrica
                 );
                 uv2 = uvABM.traer(idUnidadVenta);
                 System.out.println("FoodTruck creado: " + uv2);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al crear la unidad de venta: " + e.getMessage());
+        }
+        
+        try {
+            if (festival1 != null) {
+                int idUnidadVenta = uvABM.agregar(
+                        "Puesto Y",
+                        null,
+                        25,
+                        "LKASD81461",
+                        festival1,
+                        2,
+                        60);
+                uv3 = uvABM.traer(idUnidadVenta);
+                System.out.println("Unidad de venta creada: " + uv3);
             }
         } catch (Exception e) {
             System.err.println("Error al crear la unidad de venta: " + e.getMessage());
@@ -124,5 +142,66 @@ public class TestAgregarDatos {
         } catch (Exception e) {
             System.err.println("Error al crear a Ricardo Villalobos: " + e.getMessage());
         }
+        
+        try {
+            if (uv1 != null) {
+                int idPersonal = personalABM.agregar(
+                        "Jose",
+                        "Rivadavia",
+                        45015012,
+                        LocalDate.of(2001, 1, 6),
+                        LocalDate.now(),
+                        1800,
+                        uv1,
+                        "Chef",
+                        2100);
+                Personal Jose = personalABM.traer(idPersonal);
+                System.out.println("Personal creado: " + Jose);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al crear a Jose Rivadavia: " + e.getMessage());
+        }
+        
+        try {
+            if (uv3 != null) {
+                int idPersonal = personalABM.agregar(
+                        "Pablo",
+                        "Ramirez",
+                        34598712,
+                        LocalDate.of(1990, 11, 16),
+                        LocalDate.now(),
+                        1700,
+                        uv3,
+                        "Chef",
+                        2200);
+                Personal Pablo = personalABM.traer(idPersonal);
+                System.out.println("Personal creado: " + Pablo);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al crear a Jose Rivadavia: " + e.getMessage());
+        }
+        
+        try {
+            if (uv2 != null) {
+                int idPersonal = personalABM.agregar(
+                        "Agustin",
+                        "Pino",
+                        42312151,
+                        LocalDate.of(1994, 3, 5),
+                        LocalDate.now(),
+                        1780,
+                        uv2,
+                        "Chef",
+                        2280);
+                Personal Agustin = personalABM.traer(idPersonal);
+                System.out.println("Personal creado: " + Agustin);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al crear a Jose Rivadavia: " + e.getMessage());
+        }
+        
+        
+        
+        
     }
 }
