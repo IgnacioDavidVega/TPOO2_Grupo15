@@ -95,45 +95,6 @@ public class PlatoDAO {
             session.close();
         }
     }
-    public Plato traerMasVendidoPorUnidadVenta(long idUnidadVenta) throws HibernateException {
-        Plato objeto = null;
-        try {
-            iniciaOperacion();
-            String hql = "select dp.plato " +
-                         "from Pedido p join p.detallesPedido dp " +
-                         "where p.unidadVenta.idUnidadVenta = :idUnidadVenta " +
-                         "group by dp.plato " +
-                         "order by sum(dp.cantidad) desc";
-            objeto = (Plato) session.createQuery(hql)
-                            .setParameter("idUnidadVenta", idUnidadVenta)
-                            .setMaxResults(1)
-                            .uniqueResult();
-        } catch (HibernateException he) {
-            manejaExcepcion(he);
-        } finally {
-            session.close();
-        }
-        return objeto;
-    }
-
-    public Plato traerMasRedituablePorUnidadVenta(long idUnidadVenta) throws HibernateException {
-        Plato objeto = null;
-        try {
-            iniciaOperacion();
-            String hql = "select p from UnidadVenta u join u.platos p " +
-                         "where u.idUnidadVenta = :idUnidadVenta " +
-                         "order by (p.precioVenta - p.costoProduccion) desc";
-            objeto = session.createQuery(hql, Plato.class)
-                            .setParameter("idUnidadVenta", idUnidadVenta)
-                            .setMaxResults(1)
-                            .uniqueResult();
-        } catch (HibernateException he) {
-            manejaExcepcion(he);
-        } finally {
-            session.close();
-        }
-        return objeto;
-    }
 
     @SuppressWarnings("unchecked")
     public List<Plato> traer() throws HibernateException {

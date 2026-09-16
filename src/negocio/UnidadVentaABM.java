@@ -2,12 +2,11 @@ package negocio;
 
 import java.util.HashSet;
 import java.util.List;
-
+import org.hibernate.Hibernate;
 import dao.UnidadVentaDao;
 import datos.Festival;
 import datos.FoodTruck;
 import datos.Personal;
-import datos.Plato;
 import datos.PuestoDesarmable;
 import datos.UnidadVenta;
 
@@ -90,36 +89,12 @@ public class UnidadVentaABM {
 		return dao.traer();
 	}
 	
-	public UnidadVenta traerUnidadVentaYPlatos(long idUnidadVenta) {
-		return dao.traerUnidadVentaYPlatos(idUnidadVenta);
+	public List<PuestoDesarmable> traerPuestosDesarmablesPorFestivalYTiempo(long idFestival, long min, long max){
+		return dao.traerPuestosDesarmablesPorFestivalYTiempo(idFestival, min, max);
 	}
 	
-	public UnidadVenta traerUnidadVentaYPersonal(long idUnidadVenta) {
-		return dao.traerUnidadVentaYPersonal(idUnidadVenta);
-	}
 	
-	public List<UnidadVenta> traerUnidadVentaSuperficie(long superficie){
-		return dao.traerUnidadVentaSuperficie(superficie);
-	}
 	
-	//Consultar con los profes por el tema de la bidireccion
-	public boolean agregarPersonal(long idUnidadVenta, Personal personal) {
-		return dao.agregarPersonal(idUnidadVenta, personal);
-	}
 	
-	//Consultar con los profes por el tema de la bidireccion
-	public boolean agregarPlato(long idUnidadVenta, Plato plato) {
-		return dao.agregarPlato(idUnidadVenta, plato);
-	}
 	
-	public UnidadVenta traerUnidadVentaDni(int dni) throws Exception{
-		UnidadVenta unidad = dao.traerUnidadVentaDni(dni);
-		if(unidad==null) {
-			throw new Exception("ERROR, DNI no encontrado");
-		}
-		return unidad;
-	}
-	public UnidadVenta traerUnidadVentaMasRecaudadora(long idFestival) {
-	    return dao.traerUnidadVentaMasRecaudadora(idFestival);
-	}
 }
