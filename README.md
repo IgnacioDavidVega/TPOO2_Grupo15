@@ -17,7 +17,8 @@ Clases realizados:
 Testeos CDU:
 * Romero, Gabriel Omar: traerPuestosDesarmablesPorFestivalYTiempo / traerCocineroPorFestivalYEspecialidad
 * Vega, Ignacio David: traerPorFestival (consulta sobre cuantas personas trabajan en un festival especifico)
-* Avila, Brian: traerPlatoMasVendido / traerPorRangoFechas / traerCajeroMasJoven 
+* Avila, Brian: traerPlatoMasVendido / traerPorRangoFechas / traerCajeroMasJoven
+* Casco, Tomás: traerUnidadVentaMasRecaudadora / traerMasVendidoPorUnidadVenta / traerMasRedituablePorUnidadVenta
 
 Importante:
   * Se utiliza la version de Java 26.
