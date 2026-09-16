@@ -68,4 +68,11 @@ public class PlatoABM {
     public List<Plato> traer() {
         return dao.traer();
     }
+    public Plato traerMasVendidoPorUnidadVenta(long idUnidadVenta) {
+        return dao.traerMasVendidoPorUnidadVenta(idUnidadVenta);
+    }
+
+    public Plato traerMasRedituablePorUnidadVenta(long idUnidadVenta) {
+        return dao.traerMasRedituablePorUnidadVenta(idUnidadVenta);
+    }
 }
