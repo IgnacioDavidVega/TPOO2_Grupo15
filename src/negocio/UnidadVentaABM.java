@@ -93,7 +93,9 @@ public class UnidadVentaABM {
 		return dao.traerPuestosDesarmablesPorFestivalYTiempo(idFestival, min, max);
 	}
 	
-	
+	public UnidadVenta traerUnidadVentaMasRecaudadora(long idFestival) {
+	    return dao.traerUnidadVentaMasRecaudadora(idFestival);
+	}
 	
 	
 	

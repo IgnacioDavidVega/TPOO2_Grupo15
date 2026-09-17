@@ -128,6 +128,25 @@ public class UnidadVentaDao {
 		
 		return lista;
 	}
+	 //devuelve la uv que mas plata generó unicamente en base a ganancias, no tiene en cuenta costos de festival
+	public UnidadVenta traerUnidadVentaMasRecaudadora(long idFestival) throws HibernateException {
+	    UnidadVenta objeto = null;
+	    try {
+	        iniciaOperacion();
+	        String hql = "select p.unidadVenta " +
+	                     "from Pedido p join p.detallesPedido dp " +
+	                     "where p.festival.idFestival = :idFestival " +
+	                     "group by p.unidadVenta " +
+	                     "order by sum(dp.cantidad * dp.plato.precioVenta) desc";
+	        objeto = (UnidadVenta) session.createQuery(hql)
+	                        .setParameter("idFestival", idFestival)
+	                        .setMaxResults(1)
+	                        .uniqueResult();
+	    } finally {
+	        session.close();
+	    }
+	    return objeto;
+	}
 	
 	
 }
