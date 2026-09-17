@@ -57,7 +57,7 @@ public class TestAgregarDatos {
         try {
             if (festival1 != null) {
                 int idUnidadVenta = uvABM.agregar(
-                        "Puesto de Ignacio",
+                        "El Chorigol",
                         null,
                         25,
                         "IGNVG12345",
@@ -74,7 +74,7 @@ public class TestAgregarDatos {
         try {
             if (festival1 != null) {
                 int idUnidadVenta = uvABM.agregar(
-                        "Food Truck de Ignacio",
+                        "Mollejas El Pelita S.",
                         null, // responsableCargo
                         25, // superficie
                         "IGLRG12346", // código único
@@ -92,7 +92,7 @@ public class TestAgregarDatos {
         try {
             if (festival1 != null) {
                 int idUnidadVenta = uvABM.agregar(
-                        "Puesto Y",
+                        "Hamburguesas el Mago",
                         null,
                         25,
                         "LKASD81461",
@@ -116,7 +116,8 @@ public class TestAgregarDatos {
                         LocalDate.now(),
                         1200,
                         uv1,
-                        "Mañana");
+                        "Mañana",
+                        1);;
                 Personal ignacio = personalABM.traer(idPersonal);
                 System.out.println("Personal creado: " + ignacio);
             }
@@ -199,9 +200,5 @@ public class TestAgregarDatos {
         } catch (Exception e) {
             System.err.println("Error al crear a Jose Rivadavia: " + e.getMessage());
         }
-        
-        
-        
-        
     }
 }
