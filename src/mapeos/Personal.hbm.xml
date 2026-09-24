@@ -23,8 +23,9 @@
         </joined-subclass>
 
         <joined-subclass name="datos.Cajero" table="cajero">
-            <key column="idPersonal" />
+ 			<key column="idPersonal" />
             <property name="turnoTrabajo" column="turnoTrabajo" type="string" />
+            <property name="numeroCaja" column="numeroCaja" type="int" />
         </joined-subclass>
 
     </class>

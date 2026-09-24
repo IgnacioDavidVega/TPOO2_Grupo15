@@ -35,9 +35,9 @@ public class PersonalABM {
     }
 
     public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-            double sueldoBase, UnidadVenta unidadVenta, String turnoTrabajo) throws Exception {
+            double sueldoBase, UnidadVenta unidadVenta, String turnoTrabajo, int numeroCaja) throws Exception {
         Personal p = new Cajero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, unidadVenta,
-                turnoTrabajo);
+                turnoTrabajo, numeroCaja);
 
         if (dao.traerDNI(dni) != null) {
             throw new Exception("ERROR, DNI ya existe");
