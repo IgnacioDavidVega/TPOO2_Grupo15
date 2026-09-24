@@ -15,7 +15,7 @@ Clases realizados:
  * UnidadVenta -> FoodTruck y PuestoDesarmable / Romero, Gabriel Omar
 
 Testeos CDU:
-* Romero, Gabriel Omar: traerUnidadVentaSuperficie / traerUnidadVentaYPersonal / traerUnidadVentaDni
+* Romero, Gabriel Omar: traerPuestosDesarmablesPorFestivalYTiempo / traerCocineroPorFestivalYEspecialidad
 * Vega, Ignacio David: traerPorFestival (consulta sobre cuantas personas trabajan en un festival especifico)
 * Avila, Brian: traerPlatoMasVendido / traerPorRangoFechas / traerCajeroMasJoven
 * Casco, Tomás: traerUnidadVentaMasRecaudadora / traerMasVendidoPorUnidadVenta / traerMasRedituablePorUnidadVenta (rama-prueba)
