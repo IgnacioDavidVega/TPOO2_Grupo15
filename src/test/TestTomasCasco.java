@@ -15,11 +15,11 @@ public class TestTomasCasco {
         PlatoABM platoABM = PlatoABM.getInstance();
 
         try {
-            Festival festival = festivalABM.traer(2);
+            Festival festival = festivalABM.traer(1);
             System.out.println("Festival: " + festival);
 
             if (festival == null) {
-                System.err.println("No existe el Festival de Navidad");
+                System.err.println("No existe el festival");
                 return;
             }
 
