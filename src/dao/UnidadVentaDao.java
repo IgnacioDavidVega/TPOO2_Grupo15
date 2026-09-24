@@ -110,24 +110,6 @@ public class UnidadVentaDao {
 		return lista;
 	}
 	
-	public List<PuestoDesarmable> traerPuestosDesarmablesPorFestivalYTiempo(long idFestival, long min, long max){
-		
-		List<PuestoDesarmable> lista = null;
-		
-		try {
-	        iniciaOperacion();
-	        String hql = "from PuestoDesarmable p inner join fetch p.festival f " +
-	                     "where f.idFestival = :idFestival and p.tiempoMontaje between :min and :max";
-
-	        lista = session.createQuery(hql, PuestoDesarmable.class).setParameter("idFestival", idFestival)
-	                .setParameter("min", min).setParameter("max", max).getResultList();
-
-	    } finally {
-	        session.close();
-	    }
-		
-		return lista;
-	}
 	 //devuelve la uv que mas plata generó unicamente en base a ganancias, no tiene en cuenta costos de festival
 	public UnidadVenta traerUnidadVentaMasRecaudadora(long idFestival) throws HibernateException {
 	    UnidadVenta objeto = null;
