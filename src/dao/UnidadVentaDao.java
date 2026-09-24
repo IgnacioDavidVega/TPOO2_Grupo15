@@ -110,23 +110,24 @@ public class UnidadVentaDao {
 		return lista;
 	}
 	
-	public List<PuestoDesarmable> traerPuestosDesarmablesPorFestivalYTiempo(long idFestival, long min, long max){
-		
-		List<PuestoDesarmable> lista = null;
-		
-		try {
+	 //devuelve la uv que mas plata generó unicamente en base a ganancias, no tiene en cuenta costos de festival
+	public UnidadVenta traerUnidadVentaMasRecaudadora(long idFestival) throws HibernateException {
+	    UnidadVenta objeto = null;
+	    try {
 	        iniciaOperacion();
-	        String hql = "from PuestoDesarmable p inner join fetch p.festival f " +
-	                     "where f.idFestival = :idFestival and p.tiempoMontaje between :min and :max";
-
-	        lista = session.createQuery(hql, PuestoDesarmable.class).setParameter("idFestival", idFestival)
-	                .setParameter("min", min).setParameter("max", max).getResultList();
-
+	        String hql = "select p.unidadVenta " +
+	                     "from Pedido p join p.detallesPedido dp " +
+	                     "where p.festival.idFestival = :idFestival " +
+	                     "group by p.unidadVenta " +
+	                     "order by sum(dp.cantidad * dp.plato.precioVenta) desc";
+	        objeto = (UnidadVenta) session.createQuery(hql)
+	                        .setParameter("idFestival", idFestival)
+	                        .setMaxResults(1)
+	                        .uniqueResult();
 	    } finally {
 	        session.close();
 	    }
-		
-		return lista;
+	    return objeto;
 	}
 	
 	

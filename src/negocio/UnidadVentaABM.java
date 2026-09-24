@@ -3,6 +3,8 @@ package negocio;
 import java.util.HashSet;
 import java.util.List;
 import org.hibernate.Hibernate;
+
+import dao.PuestoDesarmableDAO;
 import dao.UnidadVentaDao;
 import datos.Festival;
 import datos.FoodTruck;
@@ -15,6 +17,7 @@ public class UnidadVentaABM {
 	private static UnidadVentaABM instancia = null;
 	
 	UnidadVentaDao dao = UnidadVentaDao.getInstance();
+	PuestoDesarmableDAO puestoDesarmableDAO = PuestoDesarmableDAO.getInstance();
 	
 	protected UnidadVentaABM() {}
 	
@@ -89,11 +92,13 @@ public class UnidadVentaABM {
 		return dao.traer();
 	}
 	
-	public List<PuestoDesarmable> traerPuestosDesarmablesPorFestivalYTiempo(long idFestival, long min, long max){
-		return dao.traerPuestosDesarmablesPorFestivalYTiempo(idFestival, min, max);
+	public List<PuestoDesarmable> traerPuestosDesarmablesPorFestivalYTiempo(Festival festival, long min, long max){
+		return puestoDesarmableDAO.traerPuestosDesarmablesPorFestivalYTiempo(festival, min, max);
 	}
 	
-	
+	public UnidadVenta traerUnidadVentaMasRecaudadora(long idFestival) {
+	    return dao.traerUnidadVentaMasRecaudadora(idFestival);
+	}
 	
 	
 	

@@ -2,9 +2,12 @@ package negocio;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import dao.CocineroDAO;
 import dao.PersonalDAO;
 import datos.Cajero;
 import datos.Cocinero;
+import datos.Festival;
 import datos.Personal;
 import datos.UnidadVenta;
 
@@ -12,6 +15,7 @@ public class PersonalABM {
     private static PersonalABM instancia = null; // Patrón Singleton
 
     PersonalDAO dao = PersonalDAO.getInstance();
+    CocineroDAO cocineroDAO = CocineroDAO.getInstance();
 
     protected PersonalABM() {
     }
@@ -64,7 +68,7 @@ public class PersonalABM {
         return dao.traerPorFestival(idFestival);
     }
     
-    public List<Cocinero> traerCocineroPorFestivalYEspecialidad(long idFestival, String especialidadCulinaria){
-    	return dao.traerCocineroPorFestivalYEspecialidad(idFestival, especialidadCulinaria);
+    public List<Cocinero> traerCocineroPorFestivalYEspecialidad(Festival festival, String especialidadCulinaria){
+    	return cocineroDAO.traerCocineroPorFestivalYEspecialidad(festival, especialidadCulinaria);
     }
 }
