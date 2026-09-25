@@ -6,7 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import datos.Cajero;
+import datos.Cocinero;
 import datos.Personal;
+import datos.PuestoDesarmable;
 
 public class PersonalDAO {
 
@@ -154,4 +156,24 @@ public class PersonalDAO {
         return lista;
     }
 
+    
+    public List<Cocinero> traerCocineroPorFestivalYEspecialidad(long idFestival, String especialidadCulinaria){
+    	
+    	List<Cocinero> lista = null;
+		
+		try {
+	        iniciaOperacion();
+	        String hql = "from Cocinero c inner join fetch c.unidadVenta u inner join fetch u.festival f " +
+                    "where f.idFestival = :idFestival and c.especialidadCulinaria = :especialidadCulinaria";
+
+	        lista = session.createQuery(hql, Cocinero.class).setParameter("idFestival", idFestival)
+	                .setParameter("especialidadCulinaria", especialidadCulinaria).getResultList();
+
+	    } finally {
+	        session.close();
+	    }
+		
+		return lista;
+    }
+    
 }

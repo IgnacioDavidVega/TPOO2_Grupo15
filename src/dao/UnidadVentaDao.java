@@ -1,14 +1,13 @@
 package dao;
 
 import java.util.List;
-
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.Personal;
-import datos.Plato;
+import datos.Cocinero;
+import datos.PuestoDesarmable;
 import datos.UnidadVenta;
 
 public class UnidadVentaDao {
@@ -110,89 +109,26 @@ public class UnidadVentaDao {
 		}
 		return lista;
 	}
-
-	public UnidadVenta traerUnidadVentaYPlatos(long idUnidadVenta) throws HibernateException {
-		UnidadVenta objeto = null;
-        try {
-            iniciaOperacion();            
-            String hql = "from UnidadVenta u where u.idUnidadVenta=:idUnidadVenta";            
-            objeto=(UnidadVenta) session.createQuery(hql).setParameter("idUnidadVenta", idUnidadVenta).uniqueResult();
-            Hibernate.initialize(objeto.getPlatos());
-        }
- 		finally {
- 			session.close();
-        }
-        return objeto;
-    }
 	
-	public UnidadVenta traerUnidadVentaYPersonal(long idUnidadVenta) throws HibernateException {
-		UnidadVenta objeto = null;
-        try {
-            iniciaOperacion();            
-            String hql = "from UnidadVenta u where u.idUnidadVenta=:idUnidadVenta";            
-            objeto=(UnidadVenta) session.createQuery(hql).setParameter("idUnidadVenta", idUnidadVenta).uniqueResult();
-            Hibernate.initialize(objeto.getPersonal());
-        }
- 		finally {
- 			session.close();
-        }
-        return objeto;
-    }
-	
-	public List<UnidadVenta> traerUnidadVentaSuperficie(long superficie) throws HibernateException{
-		List<UnidadVenta> lista = null;
-		try {
-			iniciaOperacion();
-			String hql = "from UnidadVenta u where u.superficie >= :superficie";
-			lista = session.createQuery(hql, UnidadVenta.class).setParameter("superficie",superficie).getResultList();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	//Revisar porque creo que son irrelevantes por la bidireccion o para preguntar
-	public boolean agregarPersonal(long idUnidadVenta, Personal personal) throws HibernateException{
-		UnidadVenta objeto = null;
-		boolean resultado=false;
-		try {
-			iniciaOperacion();
-			objeto = (UnidadVenta) session.get(UnidadVenta.class, idUnidadVenta);
-			objeto.getPersonal().add(personal);
-			tx.commit();
-			resultado=true;
-		} finally {
-			session.close();
-		}
-		return resultado;
-	}
-	
-	//Revisar porque creo que son irrelevantes por la bidireccion o para preguntar
-	public boolean agregarPlato(long idUnidadVenta, Plato plato) throws HibernateException{
-		UnidadVenta objeto = null;
-		boolean resultado=false;
-		try {
-			iniciaOperacion();
-			objeto = (UnidadVenta) session.get(UnidadVenta.class, idUnidadVenta);
-			objeto.getPlatos().add(plato);
-			tx.commit();
-			resultado=true;
-		} finally {
-			session.close();
-		}
-		return resultado;
-	}
-	
-	public UnidadVenta traerUnidadVentaDni(int dni) {
-	    UnidadVenta unidad = null;
+	 //devuelve la uv que mas plata generó unicamente en base a ganancias, no tiene en cuenta costos de festival
+	public UnidadVenta traerUnidadVentaMasRecaudadora(long idFestival) throws HibernateException {
+	    UnidadVenta objeto = null;
 	    try {
 	        iniciaOperacion();
-	        String hql = "select p.unidadVenta from Personal p join p.unidadVenta u where p.dni = :dni";
-	        unidad = (UnidadVenta) session.createQuery(hql).setParameter("dni", dni).uniqueResult();
+	        String hql = "select p.unidadVenta " +
+	                     "from Pedido p join p.detallesPedido dp " +
+	                     "where p.festival.idFestival = :idFestival " +
+	                     "group by p.unidadVenta " +
+	                     "order by sum(dp.cantidad * dp.plato.precioVenta) desc";
+	        objeto = (UnidadVenta) session.createQuery(hql)
+	                        .setParameter("idFestival", idFestival)
+	                        .setMaxResults(1)
+	                        .uniqueResult();
 	    } finally {
 	        session.close();
 	    }
-	    return unidad;
+	    return objeto;
 	}
+	
 	
 }

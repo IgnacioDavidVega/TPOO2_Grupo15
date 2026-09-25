@@ -2,9 +2,12 @@ package negocio;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import dao.CocineroDAO;
 import dao.PersonalDAO;
 import datos.Cajero;
 import datos.Cocinero;
+import datos.Festival;
 import datos.Personal;
 import datos.UnidadVenta;
 
@@ -12,6 +15,7 @@ public class PersonalABM {
     private static PersonalABM instancia = null; // Patrón Singleton
 
     PersonalDAO dao = PersonalDAO.getInstance();
+    CocineroDAO cocineroDAO = CocineroDAO.getInstance();
 
     protected PersonalABM() {
     }
@@ -31,9 +35,9 @@ public class PersonalABM {
     }
 
     public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso,
-            double sueldoBase, UnidadVenta unidadVenta, String turnoTrabajo) throws Exception {
+            double sueldoBase, UnidadVenta unidadVenta, String turnoTrabajo, int numeroCaja) throws Exception {
         Personal p = new Cajero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldoBase, unidadVenta,
-                turnoTrabajo);
+                turnoTrabajo, numeroCaja);
 
         if (dao.traerDNI(dni) != null) {
             throw new Exception("ERROR, DNI ya existe");
@@ -62,5 +66,9 @@ public class PersonalABM {
     // Consulta para traerPorFestival
     public List<Personal> traerPorFestival(long idFestival) {
         return dao.traerPorFestival(idFestival);
+    }
+    
+    public List<Cocinero> traerCocineroPorFestivalYEspecialidad(Festival festival, String especialidadCulinaria){
+    	return cocineroDAO.traerCocineroPorFestivalYEspecialidad(festival, especialidadCulinaria);
     }
 }
